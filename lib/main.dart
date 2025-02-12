@@ -1,123 +1,5 @@
-// import 'package:flutter/material.dart';
-
-// void main() {
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: 'Stables UTRGV Parking App',
-//       theme: ThemeData(
-//         colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 183, 87, 58)),
-//         useMaterial3: true,
-//       ),
-//       home: const MainScreen(),
-//     );
-//   }
-// }
-
-// class MainScreen extends StatefulWidget {
-//   const MainScreen({super.key});
-
-//   @override
-//   _MainScreenState createState() => _MainScreenState();
-// }
-
-// class _MainScreenState extends State<MainScreen> {
-//   int _selectedIndex = 0;
-
-//   // List of screens for navigation
-//   final List<Widget> _screens = [
-//     const HomeScreen(),
-//     const RewardsScreen(),
-//     const MapScreen(),
-//     const SettingsScreen(),
-//     const Account(),
-//   ];
-
-//   void _onItemTapped(int index) {
-//     setState(() {
-//       _selectedIndex = index;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: const Text('Stables - UTRGV Parking App')),
-//       body: _screens[_selectedIndex],
-//       bottomNavigationBar: BottomNavigationBar(
-//         currentIndex: _selectedIndex,
-//         onTap: _onItemTapped,
-//         type: BottomNavigationBarType.fixed, // Ensures labels are visible
-//         selectedItemColor: Colors.deepOrange,
-//         unselectedItemColor: Colors.grey,
-//         items: const [
-//           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-//           BottomNavigationBarItem(icon: Icon(Icons.attach_money), label: 'Rewards'),
-//           BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
-//           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
-//           BottomNavigationBarItem(icon: Icon(Icons.account_box), label: 'Account'),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class HomeScreen extends StatelessWidget {
-//   const HomeScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Center(child: Text("Welcome to Home!"));
-//   }
-// }
-
-// class RewardsScreen extends StatelessWidget {
-//   const RewardsScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Center(child: Text("Rewards Page"));
-//   }
-// }
-
-// class MapScreen extends StatelessWidget {
-//   const MapScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Center(child: Text("Map Page"));
-//   }
-// }
-
-// class SettingsScreen extends StatelessWidget {
-//   const SettingsScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Center(child: Text("Settings Page"));
-//   }
-// }
-
-// class Account extends StatelessWidget {
-//   const Account({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Center(child: Text("User Account Page"));
-//   }
-// }
-//
-// ADDING COLOR BELOW 
-//
-
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -133,12 +15,13 @@ class MyApp extends StatelessWidget {
       title: 'Stables UTRGV Parking App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFFF8200), // UTRGV Orange as main theme color
-          primary: const Color(0xFFFF8200),   // Orange
+          seedColor: const Color.fromARGB(
+              255, 243, 188, 129), // UTRGV Orange as main theme color
+          primary: const Color.fromARGB(255, 238, 178, 114), // Orange
           secondary: const Color(0xFF0C8443), // Green
-          surface: const Color(0xFF4B4F54),   // Dark Gray
-          onPrimary: Colors.white,            // Text color on Orange
-          onSecondary: Colors.white,          // Text color on Green
+          surface: const Color.fromARGB(255, 10, 10, 11), // Dark Gray
+          onPrimary: Colors.white, // Text color on Orange
+          onSecondary: Colors.white, // Text color on Green
         ),
         useMaterial3: true,
       ),
@@ -176,7 +59,8 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFF8200), // UTRGV Orange
-        title: const Text('Stables - UTRGV Parking App', style: TextStyle(color: Colors.white)),
+        title: const Text('Stables - UTRGV Parking App',
+            style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings, color: Colors.white),
@@ -193,15 +77,19 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFFFF8200), // UTRGV Orange
+        selectedItemColor:
+            const Color.fromARGB(255, 241, 200, 157), // UTRGV Orange
         unselectedItemColor: Colors.grey,
         backgroundColor: Colors.white,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.attach_money), label: 'Rewards'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.attach_money), label: 'Rewards'),
           BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
-          BottomNavigationBarItem(icon: Icon(Icons.account_box), label: 'Account'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: 'Settings'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_box), label: 'Account'),
         ],
       ),
     );
@@ -213,10 +101,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         "Welcome to Home!",
-        style: TextStyle(fontSize: 20, color: const Color(0xFFFF8200)), // UTRGV Green
+        style: TextStyle(fontSize: 20, color: Colors.white),
       ),
     );
   }
@@ -227,24 +115,45 @@ class RewardsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         "Rewards Page",
-        style: TextStyle(fontSize: 20, color: const Color(0xFFFF8200)), // UTRGV Orange
+        style: TextStyle(fontSize: 20, color: Color(0xFFFF8200)), // UTRGV Orange
       ),
     );
   }
 }
 
-class MapScreen extends StatelessWidget {
+class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
 
   @override
+  _MapScreenState createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
+  GoogleMapController? _controller;
+  final LatLng _initialPosition = LatLng(26.3082, -98.1740); // UTRGV
+
+  void _onMapCreated(GoogleMapController controller) {
+    setState(() {
+      _controller = controller;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        "Map Page",
-        style: TextStyle(fontSize: 20, color: const Color(0xFFFF8200)), // Dark Gray
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Vaquero Map",style: TextStyle(color: Color.fromARGB(255, 254, 253, 253))),
+        backgroundColor: const Color(0xFFFF8200), // UTRGV Orange
+      ),
+      body: GoogleMap(
+        onMapCreated: _onMapCreated,
+        initialCameraPosition: CameraPosition(
+          target: _initialPosition,
+          zoom: 15.0, // Adjust zoom level for better visibility
+        ),
       ),
     );
   }
@@ -255,10 +164,10 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         "Settings Page",
-        style: TextStyle(fontSize: 20, color: const Color(0xFFFF8200)), // UTRGV Green
+        style: TextStyle(fontSize: 20, color: Color(0xFFFF8200)), // UTRGV Orange
       ),
     );
   }
@@ -269,10 +178,10 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         "User Account Page",
-        style: TextStyle(fontSize: 20, color: const Color(0xFFFF8200)), // UTRGV Orange
+        style: TextStyle(fontSize: 20, color: Color(0xFFFF8200)), // UTRGV Orange
       ),
     );
   }

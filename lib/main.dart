@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
               255, 243, 188, 129), // UTRGV Orange as main theme color
           primary: const Color.fromARGB(255, 238, 178, 114), // Orange
           secondary: const Color(0xFF0C8443), // Green
-          surface: const Color.fromARGB(255, 10, 10, 11), // Dark Gray
+          surface: const Color.fromARGB(0, 10, 10, 11), // Dark Gray
           onPrimary: Colors.white, // Text color on Orange
           onSecondary: Colors.white, // Text color on Green
         ),
@@ -146,7 +146,7 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Vaquero Map",style: TextStyle(color: Color.fromARGB(255, 254, 253, 253))),
-        backgroundColor: const Color(0xFFFF8200), // UTRGV Orange
+
       ),
       body: GoogleMap(
         onMapCreated: _onMapCreated,

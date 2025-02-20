@@ -15,8 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Stables UTRGV Parking App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(
-              255, 243, 188, 129), // UTRGV Orange as main theme color
+          seedColor: const Color.fromARGB(255, 243, 188, 129), // UTRGV Orange as main theme color
           primary: const Color.fromARGB(255, 238, 178, 114), // Orange
           secondary: const Color(0xFF0C8443), // Green
           surface: const Color.fromARGB(0, 10, 10, 11), // Dark Gray
@@ -44,8 +43,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const RewardsScreen(),
     const MapScreen(),
-    const SettingsScreen(),
-    const AccountScreen(),
+    const AccountScreen(), 
   ];
 
   void _onItemTapped(int index) {
@@ -61,16 +59,6 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: const Color(0xFFFF8200), // UTRGV Orange
         title: const Text('Stables - UTRGV Parking App',
             style: TextStyle(color: Colors.white)),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings, color: Colors.white),
-            onPressed: () {
-              setState(() {
-                _selectedIndex = 3; // Switch to Settings tab
-              });
-            },
-          ),
-        ],
       ),
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -87,9 +75,7 @@ class _MainScreenState extends State<MainScreen> {
               icon: Icon(Icons.attach_money), label: 'Rewards'),
           BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: 'Settings'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_box), label: 'Account'),
+              icon: Icon(Icons.account_box), label: 'Account'), 
         ],
       ),
     );
@@ -104,7 +90,7 @@ class HomeScreen extends StatelessWidget {
     return const Center(
       child: Text(
         "Welcome to Home!",
-        style: TextStyle(fontSize: 20, color: Colors.white),
+        style: TextStyle(fontSize: 20, color: Color(0xFFFF8200)),
       ),
     );
   }
@@ -146,7 +132,6 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Vaquero Map",style: TextStyle(color: Color.fromARGB(255, 254, 253, 253))),
-
       ),
       body: GoogleMap(
         onMapCreated: _onMapCreated,
@@ -158,31 +143,81 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 }
-
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        "Settings Page",
-        style: TextStyle(fontSize: 20, color: Color(0xFFFF8200)), // UTRGV Orange
-      ),
-    );
-  }
-}
-
+// avatar notes for context of changing 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        "User Account Page",
-        style: TextStyle(fontSize: 20, color: Color(0xFFFF8200)), // UTRGV Orange
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Profile Information Section
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: CircleAvatar(
+  radius: 50, // Adjust the size of the avatar
+  backgroundColor: Color(0xFFFF8200), // Optional: background color for better visibility
+  child: const Icon(
+    Icons.account_circle, // Built-in icon for user profile
+    size: 80, // Adjust the size of the icon
+    color: Color.fromARGB(255, 255, 255, 255), // You can customize the color, here it’s set to green
+  ),
+)
+
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text('Victor Silva', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text('victorsilva@utrgv.edu', style: TextStyle(fontSize: 18, color: Colors.grey)),
+        ),
+
+        // settings here
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+          child: Text('Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        ),
+        ListTile(
+          title: const Text('random'),
+          onTap: () {
+            
+          },
+        ),
+        ListTile(
+          title: const Text('random'),
+          onTap: () {
+            
+          },
+        ),
+        ListTile(
+          title: const Text('random'),
+          onTap: () {
+            
+          },
+        ),
+        
+        
+        ListTile(
+          title: const Text('random'),
+          onTap: () {
+            
+          },
+        ),
+        ListTile(
+          title: const Text('random'),
+          onTap: () {
+            
+          },
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+          child: Text('App Version 1.0', style: TextStyle(fontSize: 16, color: Colors.grey)),
+        ),
+      ],
     );
   }
 }
+

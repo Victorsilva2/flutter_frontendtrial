@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,13 +16,11 @@ class MyApp extends StatelessWidget {
       title: 'Stables UTRGV Parking App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(
-              255, 243, 188, 129), // UTRGV Orange as main theme color
+          seedColor: const Color.fromARGB(255, 243, 188, 129), // UTRGV Orange as main theme color
           primary: const Color.fromARGB(255, 238, 178, 114), // Orange
           secondary: const Color(0xFF0C8443), // Green
-          surface: const Color.fromARGB(0, 10, 10, 11), // Dark Gray
           onPrimary: Colors.white, // Text color on Orange
-          onSecondary: Colors.white, // Text color on Green
+          onSecondary: const Color.fromARGB(255, 2, 2, 2), // Text color on Green
         ),
         useMaterial3: true,
       ),
@@ -59,8 +58,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFF8200), // UTRGV Orange
-        title: const Text('Stables - UTRGV Parking App',
-            style: TextStyle(color: Colors.white)),
+        title: const Text('Stables - UTRGV Parking App', style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings, color: Colors.white),
@@ -77,19 +75,15 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor:
-            const Color.fromARGB(255, 241, 200, 157), // UTRGV Orange
+        selectedItemColor: const Color.fromARGB(255, 241, 200, 157), // UTRGV Orange
         unselectedItemColor: Colors.grey,
         backgroundColor: Colors.white,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.attach_money), label: 'Rewards'),
+          BottomNavigationBarItem(icon: Icon(Icons.attach_money), label: 'Rewards'),
           BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: 'Settings'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_box), label: 'Account'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+          BottomNavigationBarItem(icon: Icon(Icons.account_box), label: 'Account'),
         ],
       ),
     );
@@ -132,29 +126,21 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  GoogleMapController? _controller;
   final LatLng _initialPosition = LatLng(26.3082, -98.1740); // UTRGV
-
-  void _onMapCreated(GoogleMapController controller) {
-    setState(() {
-      _controller = controller;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Vaquero Map",style: TextStyle(color: Color.fromARGB(255, 254, 253, 253))),
-
+    return FlutterMap(
+      options: MapOptions(
+       
       ),
-      body: GoogleMap(
-        onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(
-          target: _initialPosition,
-          zoom: 15.0, // Adjust zoom level for better visibility
+      children: [
+        TileLayer( // Bring your own tiles
+          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          userAgentPackageName: 'com.example.flutterFrontendtrial', // Add your app identifier
         ),
-      ),
+  
+      ],
     );
   }
 }
